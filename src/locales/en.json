@@ -1,0 +1,22 @@
+{
+    "sectionNews": "Section news",
+    "sectionMessage": "Message",
+    "sectionAbout": "About",
+    "sectionVision": "Vision",
+    "sectionGoals": "Goals",
+    "home": "Home",
+    "staff": "Staff",
+    "lessons": "Lectures",
+    "postedOn": "Posted on",
+    "postedBy": "By",
+    "profile": "Profile",
+    "cv": "CV",
+    "email": "Email address",
+    "levels": {
+        "one": "1st Level",
+        "two": "2nd Level",
+        "three": "3rd Level",
+        "four": "4th Level",
+        "five": "5th Level"
+    }
+}

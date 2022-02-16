@@ -1,0 +1,186 @@
+<template>
+  <div v-if="section != null" id="geustHome">
+    <div dir="ltr" v-if="sliderPosts.length > 0" id="mainSlider">
+      <vue-glide :options="mainSliderOptions">
+        <vue-glide-slide
+          v-for="post in sliderPosts"
+          :key="'Slider_' + post.idPost"
+        >
+          <router-link :to="'/' + section.sectionSlug + '/post/' + post.idPost">
+            <div
+              class="ducSlide"
+              :style="
+                'background-image: url(' + $baseUrl + post.postImage + ')'
+              "
+            >
+              <div class="sliderContent">
+                {{ $locale == "en" ? post.postTitleEn : post.postTitle }}
+              </div>
+            </div>
+          </router-link>
+        </vue-glide-slide>
+      </vue-glide>
+    </div>
+
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionNews") }}</div>
+    </div>
+
+    <div dir="ltr" v-if="posts.length > 0" id="latestNews">
+      <vue-glide v-if="posts.length > 0" :options="postsSliderOptions">
+        <vue-glide-slide v-for="post in posts" :key="'NEWS_' + post.idPost">
+          <v-card
+            :to="'/' + section.sectionSlug + '/post/' + post.idPost"
+            class="ma-5"
+          >
+            <v-img
+              :src="$baseUrl + post.postImage"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+            >
+              <v-card-title>
+                {{ $locale == "en" ? post.postTitleEn : post.postTitle }}
+              </v-card-title>
+              <v-card-subtitle>
+                <v-icon right small dark> la-clock </v-icon>
+                <small>{{ post.createdAt }}</small>
+              </v-card-subtitle>
+            </v-img>
+          </v-card>
+        </vue-glide-slide>
+      </vue-glide>
+    </div>
+
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionAbout") }}</div>
+    </div>
+
+    <v-alert
+      class="mx-10"
+      color="cyan"
+      border="left"
+      colored-border
+      icon="la-info"
+    >
+      {{ $locale == "en" ? section.aboutEn : section.about }}
+    </v-alert>
+
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionMessage") }}</div>
+    </div>
+
+    <v-alert
+      class="mx-10"
+      color="error"
+      border="left"
+      colored-border
+      icon="la-sms"
+    >
+      {{ $locale == "en" ? section.messageEn : section.message }}
+    </v-alert>
+
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionVision") }}</div>
+    </div>
+
+    <v-alert
+      class="mx-10"
+      color="warning"
+      border="left"
+      colored-border
+      icon="la-eye"
+    >
+      {{ $locale == "en" ? section.visionEn : section.vision }}
+    </v-alert>
+
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionGoals") }}</div>
+    </div>
+
+    <v-alert
+      class="mx-10"
+      color="success"
+      border="left"
+      colored-border
+      icon="la-check-circle"
+    >
+      {{ $locale == "en" ? section.goalsEn : section.goals }}
+    </v-alert>
+
+    <br /><br /><br /><br />
+  </div>
+</template>
+
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: this.title,
+      titleTemplate: "%s - Dijla University",
+      htmlAttrs: {
+        lang: this.$locale,
+        amp: true,
+      },
+    };
+  },
+  data: () => ({
+    title: "",
+    section: null,
+    sliderPosts: [],
+    posts: [],
+    mainSliderOptions: {
+      autoplay: 4000,
+      type: "slider",
+      perView: 1,
+      gap: 0,
+      startAt: 0,
+      peek: 0,
+      hoverpause: false,
+      breakpoints: {
+        800: {
+          peek: 0,
+        },
+      },
+    },
+    postsSliderOptions: {
+      autoplay: 4000,
+      type: "carousal",
+      perView: 4,
+      gap: 10,
+      direction: "rtl",
+      startAt: 0,
+      peek: 0,
+      hoverpause: true,
+      breakpoints: {
+        800: {
+          gap: 0,
+          perView: 2,
+        },
+      },
+    },
+  }),
+  created: function () {
+    this.$http
+      .get("sections/slug/" + this.$route.params.section)
+      .then((res) => {
+        this.section = res.data;
+        this.title = res.data.sectionName;
+        localStorage.setItem("geustSectionInfo", JSON.stringify(this.section));
+        this.$http
+          .get("posts/slider/section/" + this.section.idSection)
+          .then((res) => {
+            this.sliderPosts = res.data;
+          });
+        this.$http
+          .get("posts/section/" + this.section.idSection)
+          .then((res) => {
+            this.posts = res.data;
+          });
+      });
+  },
+};
+</script>
+
+<style>
+</style>
