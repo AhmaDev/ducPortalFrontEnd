@@ -25,7 +25,7 @@ var locale = localStorage.getItem("locale") || "ar";
 
 Vue.config.productionTip = false
 Vue.prototype.$locale = locale;
-Vue.prototype.$baseUrl = 'http://localhost:3009/';
+Vue.prototype.$baseUrl = 'https://api.portal.duc.edu.iq/';
 Vue.prototype.$appVersion = '1.0.0';
 const axiosConfig = {
   headers: { Authorization: `Bearer ${token}` },

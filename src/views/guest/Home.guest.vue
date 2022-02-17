@@ -148,7 +148,7 @@ export default {
       type: "carousal",
       perView: 4,
       gap: 10,
-      direction: "rtl",
+      direction: localStorage.getItem("locale") == 'en' ? 'ltr' : "rtl",
       startAt: 0,
       peek: 0,
       hoverpause: true,
