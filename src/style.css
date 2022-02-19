@@ -148,3 +148,7 @@
   .divider .divider-content:not(:empty) {
     letter-spacing: 1px;
   }
+
+  .customeButton {
+    background-color: #000;
+  }

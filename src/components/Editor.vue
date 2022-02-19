@@ -89,8 +89,18 @@
               <v-btn @click="selectImage()">
                 <v-icon>la-image</v-icon>
               </v-btn>
-              <v-btn @click="addVideoModel = true">
+              <v-btn @click="addVideoModal = true">
                 <v-icon>la-youtube</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </v-col>
+          <v-col>
+            <v-btn-toggle dense>
+              <v-btn @click="addAlertModal = true">
+                <v-icon>la-magic</v-icon>
+              </v-btn>
+              <v-btn @click="addLinkModal = true">
+                <v-icon>la-link</v-icon>
               </v-btn>
             </v-btn-toggle>
           </v-col>
@@ -106,7 +116,7 @@
       <Uploads :isDialog="true" @clicked="setImagePath" />
     </vue-bottom-sheet>
 
-    <v-dialog max-width="500" v-model="addVideoModel">
+    <v-dialog max-width="500" v-model="addVideoModal">
       <v-card>
         <v-card-title>اضافة فيديو يوتيوب</v-card-title>
         <v-card-text>
@@ -120,6 +130,95 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn @click="addVideoLink" color="success">اضافة</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog max-width="500" v-model="addAlertModal">
+      <v-card>
+        <v-card-title>اضافة نص</v-card-title>
+        <v-card-text>
+          <v-checkbox
+            true-value="d-block"
+            false-value="d-inline"
+            v-model="alertType"
+            label="اتساع كامل"
+          ></v-checkbox>
+          <v-row>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('success')"
+                color="success"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('primary')"
+                color="primary"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('indigo')"
+                color="indigo"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('warning')"
+                color="warning"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('error')"
+                color="error"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+            <v-col :cols="alertType == 'd-block' ? 12 : 6">
+              <v-alert
+                @click="addAlert('dark')"
+                color="dark"
+                dark
+                class="text-center"
+                >TEXT</v-alert
+              >
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+
+     <v-dialog max-width="500" v-model="addLinkModal">
+      <v-card>
+        <v-card-title>اضافة رابط</v-card-title>
+        <v-card-text>
+          <v-text-field
+            v-model="link"
+            outlined
+            label="الرابط"
+            append-icon="mdi-link"
+          ></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn @click="addButton('primary')" color="success">اضافة</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -141,11 +240,13 @@ import Color from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
 import Image from "@tiptap/extension-image";
 import Video from "../plugins/video";
+import vAlert from "../plugins/vAlert";
 import Table from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Link from "@tiptap/extension-link";
+import Button from "../plugins/vButton";
 
 export default {
   components: {
@@ -187,7 +288,11 @@ export default {
         "64px",
         "72px",
       ],
-      addVideoModel: false,
+      addVideoModal: false,
+      addAlertModal: false,
+      addLinkModal: false,
+      alertType: "d-block",
+      link: "",
       youtubeLink: "",
     };
   },
@@ -215,12 +320,19 @@ export default {
     addVideoLink() {
       this.addYoutubeVideo(this.youtubeLink);
       this.youtubeLink = "";
-      this.addVideoModel = false;
+      this.addVideoModal = false;
     },
-    addAlert() {
+    addAlert(color = "success") {
       this.editor.commands.insertContent(
-        `<div role="alert" class="v-alert v-sheet theme--dark elevation-0 success" file="v-alert/usage"><div class="v-alert__wrapper"><span aria-hidden="true" class="v-icon notranslate v-alert__icon theme--dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="v-icon__svg"><path d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path></svg></span><div class="v-alert__content"> I'm an Alert Usage Example </div></div></div>`
+        `<p class="v-alert ${this.alertType} v-sheet v-sheet--shaped theme--dark ${color} text-center text-h5">TEXT HERE</p>`
       );
+      this.addAlertModal = false;
+    },
+    addButton(color = "success") {
+      this.editor.commands.insertContent(
+        `<a class="v-btn v-btn--has-bg theme--dark v-size--default ${color}" href="${this.link}">TEXT HERE</a>`
+      );
+      this.addLinkModal = false;
     },
   },
   watch: {
@@ -255,6 +367,8 @@ export default {
         Video.configure({
           inline: true,
         }),
+        vAlert,
+        Button,
         TextStyle,
         Heading.configure({
           levels: [1, 2, 3],
