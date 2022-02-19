@@ -92,9 +92,6 @@
               <v-btn @click="addVideoModel = true">
                 <v-icon>la-youtube</v-icon>
               </v-btn>
-              <v-btn @click="addAlert()">
-                <v-icon>la-alert</v-icon>
-              </v-btn>
             </v-btn-toggle>
           </v-col>
         </v-row>
@@ -148,6 +145,7 @@ import Table from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
+import Link from "@tiptap/extension-link";
 
 export default {
   components: {
@@ -250,6 +248,9 @@ export default {
         Paragraph,
         Underline,
         Bold,
+        Link.configure({
+          autolink: true,
+        }),
         Text,
         Video.configure({
           inline: true,

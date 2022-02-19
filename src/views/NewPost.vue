@@ -142,21 +142,9 @@ export default {
         return;
       }
       if (this.newPostForm.postTitleEn.length == 0) {
-        this.$toast.open({
-          type: "error",
-          message: "يرجى كتابة عنوان الخبر باللغة الانجليزية",
-          duration: 3000,
-        });
-        return;
+        this.newPostForm.postTitleEn = this.newPostForm.postTitle;
       }
-      if (this.newPostForm.postContentEn.length == 0) {
-        this.$toast.open({
-          type: "error",
-          message: "يرجى كتابة نص الخبر باللغة الانجليزية",
-          duration: 3000,
-        });
-        return;
-      }
+
       if (this.postId == 0) {
         this.newPostForm.createdBy = this.userInfo.idUser;
         this.newPostForm.sectionId = this.userInfo.sectionId;

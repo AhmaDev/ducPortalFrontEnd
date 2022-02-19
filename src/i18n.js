@@ -5,7 +5,9 @@ Vue.use(VueI18n)
 
 var locale = localStorage.getItem("locale") || "ar";
 
-function loadLocaleMessages () {
+console.log(locale);
+
+function loadLocaleMessages() {
   const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
   locales.keys().forEach(key => {
@@ -19,7 +21,7 @@ function loadLocaleMessages () {
 }
 
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || locale,
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || locale,
+  locale: locale,
+  fallbackLocale: 'ar',
   messages: loadLocaleMessages()
 })

@@ -130,20 +130,7 @@ export default {
         return;
       }
       if (this.newPageForm.pageTitleEn.length == 0) {
-        this.$toast.open({
-          type: "error",
-          message: "يرجى كتابة عنوان الصفحة باللغة الانجليزية",
-          duration: 3000,
-        });
-        return;
-      }
-      if (this.newPageForm.pageContentEn.length == 0) {
-        this.$toast.open({
-          type: "error",
-          message: "يرجى كتابة نص الصفحة باللغة الانجليزية",
-          duration: 3000,
-        });
-        return;
+        this.newPageForm.pageTitleEn = this.newPageForm.pageTitle
       }
       if (this.pageId == 0) {
         this.newPageForm.createdBy = this.userInfo.idUser;
