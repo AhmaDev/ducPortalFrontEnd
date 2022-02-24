@@ -2,7 +2,7 @@
   <div v-if="page != null" class="pa-10" id="guestPage">
     <v-card>
       <v-card-text>
-        <div v-html="$locale == 'en' ? page.pageContentEn : page.pageContent"></div>
+        <div style="overflow: auto;" v-html="$locale == 'en' ? page.pageContentEn : page.pageContent"></div>
       </v-card-text>
     </v-card>
   </div>

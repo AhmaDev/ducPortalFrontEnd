@@ -23,21 +23,6 @@
                 <v-list>
                   <v-list-item two-line>
                     <v-list-item-avatar>
-                      <v-icon>la-info-circle</v-icon>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                      <v-list-item-title> {{$t('cv')}} </v-list-item-title>
-                      <v-list-item-subtitle>
-                        <a :href="staff.cvLink" target="_BLANK">{{
-                          staff.cvLink
-                        }}</a>
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-divider></v-divider>
-
-                  <v-list-item two-line>
-                    <v-list-item-avatar>
                       <v-icon>la-newspaper</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
@@ -71,7 +56,7 @@
                       <v-icon>la-envelope</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                      <v-list-item-title> {{$t('email')}} </v-list-item-title>
+                      <v-list-item-title> {{ $t("email") }} </v-list-item-title>
                       <v-list-item-subtitle>
                         <a
                           :href="'mailto:' + staff.staffEmail + '@duc.edu.iq'"
@@ -83,7 +68,18 @@
                     </v-list-item-content>
                   </v-list-item>
                   <v-divider></v-divider>
+                  <v-list-item two-line>
+                    <v-list-item-avatar>
+                      <v-icon>la-info-circle</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title> {{ $t("cv") }} </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
+                <div class="mx-10">
+                  <temlplate v-html="staff.cvLink"></temlplate>
+                </div>
               </v-col>
             </v-row>
           </v-card-text>

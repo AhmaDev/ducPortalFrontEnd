@@ -1,7 +1,14 @@
 <template>
   <v-app :style="this.$vuetify.theme.dark ? '' : 'background-color: #EEE'">
-    <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" app :right="$locale == 'ar'" permanent>
-      <div class="pa-2">
+    <v-navigation-drawer
+      :mini-variant="drawer"
+      mini-variant-width="72"
+      v-if="isLoggedIn"
+      app
+      :right="$locale == 'ar'"
+      permanent
+    >
+      <div v-if="!drawer" class="pa-2">
         <v-card class="mx-auto" max-width="344" outlined>
           <v-list-item dense>
             <v-list-item-avatar style="border-radius: 0px">
@@ -17,8 +24,8 @@
               </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn icon @click="logout()">
-                <v-icon color="error">mdi-power</v-icon>
+              <v-btn icon @click="launchDrawer()">
+                <v-icon>la-bars</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
@@ -26,6 +33,11 @@
       </div>
 
       <v-list rounded dense>
+        <v-list-item v-if="drawer" @click="launchDrawer()">
+          <v-list-item-icon>
+            <v-icon>la-bars</v-icon>
+          </v-list-item-icon>
+        </v-list-item>
         <template v-for="item in items">
           <v-list-item
             v-if="
@@ -51,6 +63,14 @@
 
       <template v-slot:append>
         <v-list rounded dense>
+          <v-list-item @click="logout()">
+            <v-list-item-icon>
+              <v-icon>la-power-off</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title> تسجيل الخروج </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item @click="darkMode()">
             <v-list-item-icon>
               <v-icon v-if="$vuetify.theme.dark">las la-sun</v-icon>
@@ -82,6 +102,7 @@
             <!-- <Login v-if="!isLoggedIn" /> -->
             <router-view />
           </vue-page-transition>
+            <vue-progress-bar></vue-progress-bar>
         </v-container>
       </v-main>
     </div>
@@ -115,7 +136,7 @@ export default {
     Logo,
   },
   data: () => ({
-    drawer: true,
+    drawer: false,
     items: [],
     infoDialog: false,
   }),
@@ -131,6 +152,10 @@ export default {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem("darkMode", this.$vuetify.theme.dark);
     },
+    launchDrawer() {
+      this.drawer = !this.drawer;
+      localStorage.setItem("drawer", this.drawer);
+    },
   },
   computed: {
     isLoggedIn() {
@@ -140,16 +165,24 @@ export default {
       return this.$store.getters.getLoginInfo;
     },
   },
+  mounted: function () {
+    this.$Progress.finish();
+  },
   created: function () {
+    this.$Progress.start();
+
     let isDarkMode = false;
     if (localStorage.getItem("darkMode") == "true") {
       isDarkMode = true;
+    }
+    if (localStorage.getItem("drawer") == "true") {
+      this.drawer = true;
     }
     this.$vuetify.theme.dark = isDarkMode;
     if (this.userInfo != null) {
       this.items = [
         {
-          title: this.$t('home'),
+          title: this.$t("home"),
           icon: "las la-home",
           route: "/" + this.userInfo.sectionSlug,
           role: "All",
@@ -166,7 +199,7 @@ export default {
         },
         {
           title: "القوائم",
-          icon: "la-bars",
+          icon: "la-file-alt",
           route: "/" + this.userInfo.sectionSlug + "/dashboard/menu/",
           role: "Website Editor",
         },
@@ -220,6 +253,23 @@ export default {
         },
       ];
     }
+    this.$router.beforeEach((to, from, next) => {
+      //  does the page we want to go to have a meta.progress object
+      if (to.meta.progress !== undefined) {
+        let meta = to.meta.progress;
+        // parse meta tags
+        this.$Progress.parseMeta(meta);
+      }
+      //  start the progress bar
+      this.$Progress.start();
+      //  continue to next page
+      next();
+    });
+    //  hook the progress bar to finish after we've finished moving router-view
+    this.$router.afterEach((to, from) => {
+      //  finish the progress bar
+      this.$Progress.finish(to, from);
+    });
   },
 };
 </script>

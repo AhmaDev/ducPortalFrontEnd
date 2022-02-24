@@ -61,16 +61,16 @@
         <v-col cols="12">
           <v-text-field
             outlined
-            v-model="staff.cvLink"
-            label="CV"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12">
-          <v-text-field
-            outlined
             v-model="staff.scholarLink"
             label="رابط Scholar"
           ></v-text-field>
+        </v-col>
+        <v-col cols="12">
+          <h3>السيرة الذاتية</h3>
+          <br>
+          <tiptap
+            v-model="staff.cvLink"
+          ></tiptap>
         </v-col>
       </v-row>
     </v-card>
@@ -79,10 +79,12 @@
 
 <script>
 import Uploads from "../components/Upload.vue";
+import Tiptap from "../components/Editor.vue";
 
 export default {
   components: {
     Uploads,
+    Tiptap,
   },
   data: () => ({
     staff: null,

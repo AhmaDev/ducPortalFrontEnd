@@ -27,9 +27,11 @@
     </v-card>
     <br />
     <h2>اللغة العربية</h2>
+    <br>
     <tiptap v-model="newPageForm.pageContent" />
     <br />
     <h2>اللغة الانجليزية</h2>
+    <br>
     <tiptap v-model="newPageForm.pageContentEn" />
   </div>
 </template>

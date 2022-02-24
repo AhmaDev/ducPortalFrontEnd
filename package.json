@@ -37,6 +37,7 @@
     "vue-loading-overlay": "^3.4.2",
     "vue-meta": "^2.4.0",
     "vue-page-transition": "^0.2.2",
+    "vue-progressbar": "^0.7.5",
     "vue-router": "^3.2.0",
     "vue-simple-alert": "^1.1.1",
     "vue-toast-notification": "^0.6.2",

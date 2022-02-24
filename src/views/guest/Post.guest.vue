@@ -28,7 +28,7 @@
       </v-list>
 
       <v-card-text>
-        <div v-html="$locale == 'en' ? post.postContentEn : post.postContent"></div>
+        <div style="overflow: auto;" v-html="$locale == 'en' ? post.postContentEn : post.postContent"></div>
       </v-card-text>
     </v-card>
   </div>

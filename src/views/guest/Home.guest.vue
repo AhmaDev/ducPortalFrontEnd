@@ -63,7 +63,9 @@
       colored-border
       icon="la-info"
     >
-      {{ $locale == "en" ? section.aboutEn : section.about }}
+      <pre>
+        {{ $locale == "en" ? section.aboutEn : section.about }}
+      </pre>
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
@@ -77,7 +79,9 @@
       colored-border
       icon="la-sms"
     >
-      {{ $locale == "en" ? section.messageEn : section.message }}
+     <pre>
+        {{ $locale == "en" ? section.messageEn : section.message }}
+     </pre>
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
@@ -91,7 +95,9 @@
       colored-border
       icon="la-eye"
     >
-      {{ $locale == "en" ? section.visionEn : section.vision }}
+     <pre>
+        {{ $locale == "en" ? section.visionEn : section.vision }}
+     </pre>
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
@@ -105,7 +111,9 @@
       colored-border
       icon="la-check-circle"
     >
-      {{ $locale == "en" ? section.goalsEn : section.goals }}
+      <pre>
+        {{ $locale == "en" ? section.goalsEn : section.goals }}
+      </pre>
     </v-alert>
 
     <br /><br /><br /><br />

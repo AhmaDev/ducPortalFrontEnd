@@ -59,10 +59,12 @@
         </v-col>
         <v-col cols="12">
           <h2>اللغة العربية</h2>
+          <br>
           <tiptap v-model="newPostForm.postContent" />
         </v-col>
         <v-col cols="12">
           <h2>اللغة الانجليزية</h2>
+          <br>
           <tiptap v-model="newPostForm.postContentEn" />
         </v-col>
       </v-row>

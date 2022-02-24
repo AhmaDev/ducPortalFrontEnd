@@ -35,7 +35,7 @@
       </v-data-table>
     </v-card>
 
-    <v-dialog width="500" v-model="addNewStaffDialog" persistent>
+    <v-dialog width="1200" v-model="addNewStaffDialog" persistent>
       <v-card>
         <v-card-title>اضافة شخص جديد</v-card-title>
         <v-card-text>
@@ -79,15 +79,15 @@
             label="رابط Scopus"
           ></v-text-field>
           <v-text-field
-            v-model="newStaffForm.cvLink"
-            outlined
-            label="رابط CV"
-          ></v-text-field>
-          <v-text-field
             v-model="newStaffForm.scholarLink"
             outlined
             label="رابط Scholar"
           ></v-text-field>
+          <h3>السيرة الذاتية</h3>
+          <br>
+           <tiptap
+            v-model="newStaffForm.cvLink"
+          ></tiptap>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="addNewStaff()" color="success">اضافة</v-btn>
@@ -101,10 +101,12 @@
 
 <script>
 import Uploads from "../components/Upload.vue";
+import Tiptap from "../components/Editor.vue";
 
 export default {
   components: {
     Uploads,
+    Tiptap,
   },
   data: () => ({
     staff: [],

@@ -18,6 +18,7 @@ import VueGlide from 'vue-glide-js'
 import 'vue-glide-js/dist/vue-glide.css'
 import VueMeta from 'vue-meta'
 import i18n from './i18n'
+import VueProgressBar from 'vue-progressbar'
 
 
 var token = localStorage.getItem('token');
@@ -26,7 +27,7 @@ var locale = localStorage.getItem("locale") || "ar";
 Vue.config.productionTip = false
 Vue.prototype.$locale = locale;
 Vue.prototype.$baseUrl = 'https://api.portal.duc.edu.iq/';
-Vue.prototype.$appVersion = '1.2.0';
+Vue.prototype.$appVersion = '1.5.0';
 const axiosConfig = {
   headers: { Authorization: `Bearer ${token}` },
   baseURL: Vue.prototype.$baseUrl,
@@ -53,6 +54,19 @@ Vue.use(VueMeta, {
   refreshOnceOnNavigation: true
 });
 
+Vue.use(VueProgressBar, {
+  color: '#028313',
+  failedColor: '#AA0505',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+})
 
 new Vue({
   router,

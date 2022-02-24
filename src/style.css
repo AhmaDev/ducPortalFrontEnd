@@ -152,3 +152,18 @@
   .customeButton {
     background-color: #000;
   }
+
+  .custom-image-small {
+    max-width: 200px;
+}
+.custom-image-medium {
+    max-width: 500px;
+}
+.custom-image-large {
+    max-width: 100%;
+}
+
+pre {
+  font-family: 'Almarai' !important;
+  white-space: pre-wrap;
+}

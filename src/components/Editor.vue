@@ -204,8 +204,7 @@
       </v-card>
     </v-dialog>
 
-
-     <v-dialog max-width="500" v-model="addLinkModal">
+    <v-dialog max-width="500" v-model="addLinkModal">
       <v-card>
         <v-card-title>اضافة رابط</v-card-title>
         <v-card-text>
@@ -222,12 +221,51 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <bubble-menu
+      class="bubble-menu"
+      :tippy-options="{ animation: false }"
+      :editor="editor"
+      v-if="editor"
+      v-show="editor.isActive('custom-image')"
+    >
+      <v-btn
+        @click="editor.chain().focus().setImage({ size: 'small' }).run()"
+        :class="{
+          'is-active': editor.isActive('custom-image', {
+            size: 'small',
+          }),
+        }"
+      >
+        Small
+      </v-btn>
+      <v-btn
+        @click="editor.chain().focus().setImage({ size: 'medium' }).run()"
+        :class="{
+          'is-active': editor.isActive('custom-image', {
+            size: 'medium',
+          }),
+        }"
+      >
+        Medium
+      </v-btn>
+      <v-btn
+        @click="editor.chain().focus().setImage({ size: 'large' }).run()"
+        :class="{
+          'is-active': editor.isActive('custom-image', {
+            size: 'large',
+          }),
+        }"
+      >
+        Large
+      </v-btn>
+    </bubble-menu>
   </div>
 </template>
 
 <script>
 import Uploads from "./Upload.vue";
-import { Editor, EditorContent } from "@tiptap/vue-2";
+import { Editor, EditorContent, BubbleMenu } from "@tiptap/vue-2";
 import StarterKit from "@tiptap/starter-kit";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
@@ -238,7 +276,6 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Color from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
-import Image from "@tiptap/extension-image";
 import Video from "../plugins/video";
 import vAlert from "../plugins/vAlert";
 import Table from "@tiptap/extension-table";
@@ -247,11 +284,13 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Link from "@tiptap/extension-link";
 import Button from "../plugins/vButton";
+import vImage from "../plugins/vImage";
 
 export default {
   components: {
     EditorContent,
     Uploads,
+    BubbleMenu,
   },
 
   props: {
@@ -379,9 +418,7 @@ export default {
         Color.configure({
           types: ["textStyle"],
         }),
-        Image.configure({
-          inline: true,
-        }),
+   
         Table.configure({
           HTMLAttributes: {
             class: "customTable",
@@ -390,6 +427,7 @@ export default {
         TableRow,
         TableCell,
         TableHeader,
+        vImage,
       ],
       onUpdate: () => {
         // HTML
@@ -415,12 +453,26 @@ export default {
   }
 
   img {
-    max-width: 100%;
-    height: auto;
-
-    &.ProseMirror-selectednode {
-      outline: 3px solid #68cef8;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        &.ProseMirror-selectednode {
+            outline: 3px solid #68cef8;
+        }
     }
-  }
+   
+    .custom-image-float-none {
+        float: none;
+    }
+    .custom-image-float-left {
+        float: left;
+    }
+    .custom-image-float-right {
+        float: right;
+    }
 }
+
+
 </style>
