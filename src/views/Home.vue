@@ -2,16 +2,19 @@
   <div v-if="section != null" id="homePage">
     <Header :menu="menu" :section="section" :logoHeight="logoHeight" />
     <router-view />
+    <Footer :section="section" />
   </div>
 </template>
 
 <script>
 import Header from "../components/main/Header.vue";
+import Footer from "../components/main/Footer.vue";
 
 export default {
   name: "Home",
   components: {
     Header,
+    Footer,
   },
   data: () => ({
     section: null,
