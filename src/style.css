@@ -155,12 +155,22 @@
 
   .custom-image-small {
     max-width: 200px;
+    display: inline-block !important;
+    margin: 10px !important;
+
 }
 .custom-image-medium {
     max-width: 500px;
+    display: inline-block !important;
+    margin: 10px !important;
+
+
 }
 .custom-image-large {
     max-width: 100%;
+    display: inline-block !important;
+    margin: 10px !important;
+
 }
 
 pre {
