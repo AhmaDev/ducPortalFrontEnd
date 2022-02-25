@@ -26,6 +26,7 @@ const routes = [
   { path: '/:section/dashboard/pages', name: 'Pages', component: () => import('../views/Pages.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/staff', name: 'Staff', component: () => import('../views/Staff.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/lessons', name: 'Lessons', component: () => import('../views/Lessons.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
+  { path: '/:section/dashboard/gallery', name: 'Gallery', component: () => import('../views/Gallery.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/edit/staff/:id', name: 'EditStaff', component: () => import('../views/EditStaff.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
 
   // GUEST ROUTES

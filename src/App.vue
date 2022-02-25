@@ -230,7 +230,7 @@ export default {
         {
           title: "معرض الصور",
           icon: "la-photo-video",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/gallary",
+          route: "/" + this.userInfo.sectionSlug + "/dashboard/gallery",
           role: "Website Editor",
         },
         {

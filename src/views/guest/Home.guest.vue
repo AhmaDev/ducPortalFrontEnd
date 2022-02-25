@@ -79,9 +79,10 @@
       colored-border
       icon="la-sms"
     >
-     <pre>
+      <pre>
         {{ $locale == "en" ? section.messageEn : section.message }}
-     </pre>
+     </pre
+      >
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
@@ -95,9 +96,10 @@
       colored-border
       icon="la-eye"
     >
-     <pre>
+      <pre>
         {{ $locale == "en" ? section.visionEn : section.vision }}
-     </pre>
+     </pre
+      >
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
@@ -116,7 +118,25 @@
       </pre>
     </v-alert>
 
+    <div dir="ltr" class="divider divider-center">
+      <div class="divider-content">{{ $t("sectionPhotos") }}</div>
+    </div>
+
+    <div class="px-10">
+      <v-row>
+        <v-col v-for="photo in photos" :key="photo.idGallary" cols="6" md="2">
+          <v-card @click="showImage(photo.image)">
+            <v-img :src="$baseUrl + photo.image" height="200"></v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+
     <br /><br /><br /><br />
+
+    <v-dialog v-model="imageModal" width="800">
+      <img :src="$baseUrl + selectedImage" width="100%" alt="">
+    </v-dialog>
   </div>
 </template>
 
@@ -137,6 +157,9 @@ export default {
     section: null,
     sliderPosts: [],
     posts: [],
+    photos: [],
+    imageModal: false,
+    selectedImage: "",
     mainSliderOptions: {
       autoplay: 4000,
       type: "slider",
@@ -156,7 +179,7 @@ export default {
       type: "carousal",
       perView: 4,
       gap: 10,
-      direction: localStorage.getItem("locale") == 'en' ? 'ltr' : "rtl",
+      direction: localStorage.getItem("locale") == "en" ? "ltr" : "rtl",
       startAt: 0,
       peek: 0,
       hoverpause: true,
@@ -185,8 +208,19 @@ export default {
           .then((res) => {
             this.posts = res.data;
           });
+        this.$http
+          .get("photos/section/" + this.section.idSection)
+          .then((res) => {
+            this.photos = res.data;
+          });
       });
   },
+  methods: {
+    showImage(url) {
+      this.selectedImage = url;
+      this.imageModal = true;
+    }
+  }
 };
 </script>
 
