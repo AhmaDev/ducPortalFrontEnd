@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="pa-0">
-      <v-toolbar color="#7C7C7C4F">
+      <v-card class="px-10" color="#7C7C7C4F">
         <v-row>
           <v-col>
             <v-btn-toggle multiple dense>
@@ -105,7 +105,7 @@
             </v-btn-toggle>
           </v-col>
         </v-row>
-      </v-toolbar>
+      </v-card>
 
       <div class="pa-5">
         <editor-content :editor="editor" />

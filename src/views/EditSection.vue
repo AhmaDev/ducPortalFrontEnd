@@ -62,20 +62,19 @@
           </div>
         </v-col>
         <v-col cols="6">
-          <v-textarea
-            outlined
+          <h3>عن القسم</h3>
+          <br>
+          <tiptap
             v-model="section.about"
-            label="عن القسم"
-          ></v-textarea>
+          ></tiptap>
         </v-col>
         <v-divider vertical></v-divider>
-
         <v-col cols="6">
-          <v-textarea
-            outlined
+          <h3>عن القسم</h3>
+          <br>
+          <tiptap
             v-model="section.aboutEn"
-            label="عن القسم"
-          ></v-textarea>
+          ></tiptap>
         </v-col>
         <v-col cols="6">
           <v-textarea
@@ -133,11 +132,13 @@
 
 <script>
 import Uploads from "../components/Upload.vue";
+import Tiptap from "../components/Editor.vue";
 
 export default {
   name: "EditSection",
   components: {
     Uploads,
+    Tiptap
   },
   data: () => ({
     section: null,
