@@ -47,7 +47,7 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     },
-    deletePost(id) {
+    deletePage(id) {
       this.$confirm(
         "لا يمكن التراجع بعد حذف الصفحة",
         "هل انت متأكد من حذف الصفحة ؟",
