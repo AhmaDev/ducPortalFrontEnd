@@ -224,7 +224,7 @@
 
     <bubble-menu
       class="bubble-menu"
-      :tippy-options="{ animation: false }"
+      :tippy-options="{ animation: true }"
       :editor="editor"
       v-if="editor"
       v-show="editor.isActive('custom-image')"
@@ -259,6 +259,19 @@
       >
         Large
       </v-btn>
+    </bubble-menu>
+
+    <bubble-menu
+      class="bubble-menu"
+      :tippy-options="{ animation: true }"
+      :editor="editor"
+      v-if="editor"
+      v-show="editor.can().deleteTable()"
+    >
+      <v-btn small dark @click="editor.chain().focus().deleteTable().run()"> حذف الجدول </v-btn>
+      <v-btn small dark @click="editor.chain().focus().deleteRow().run()"> حذف السطر </v-btn>
+      <v-btn small dark @click="editor.chain().focus().addRowAfter().run()">  اضافة سطر جديد </v-btn>
+      
     </bubble-menu>
   </div>
 </template>
@@ -367,10 +380,12 @@ export default {
       );
       this.addAlertModal = false;
     },
-    addButton(color = "success") {
-      this.editor.commands.insertContent(
-        `<a class="v-btn v-btn--has-bg theme--dark v-size--default ${color}" href="${this.link}">TEXT HERE</a>`
-      );
+    addButton() {
+      this.editor.commands.toggleLink({
+        href: `${this.link}`,
+        target: "_blank",
+      });
+      this.link = "";
       this.addLinkModal = false;
     },
   },
@@ -401,6 +416,7 @@ export default {
         Bold,
         Link.configure({
           autolink: true,
+          openOnClick: false,
         }),
         Text,
         Video.configure({
@@ -418,7 +434,7 @@ export default {
         Color.configure({
           types: ["textStyle"],
         }),
-   
+
         Table.configure({
           HTMLAttributes: {
             class: "customTable",
@@ -453,26 +469,24 @@ export default {
   }
 
   img {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        &.ProseMirror-selectednode {
-            outline: 3px solid #68cef8;
-        }
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68cef8;
     }
-   
-    .custom-image-float-none {
-        float: none;
-    }
-    .custom-image-float-left {
-        float: left;
-    }
-    .custom-image-float-right {
-        float: right;
-    }
+  }
+
+  .custom-image-float-none {
+    float: none;
+  }
+  .custom-image-float-left {
+    float: left;
+  }
+  .custom-image-float-right {
+    float: right;
+  }
 }
-
-
 </style>

@@ -20,6 +20,7 @@ import VueMeta from 'vue-meta'
 import i18n from './i18n'
 import VueProgressBar from 'vue-progressbar'
 
+import 'tiptap-vuetify/dist/main.css'
 
 var token = localStorage.getItem('token');
 var locale = localStorage.getItem("locale") || "ar";
