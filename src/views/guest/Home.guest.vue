@@ -63,9 +63,7 @@
       colored-border
       icon="la-info"
     >
-      <pre>
-        {{ $locale == "en" ? section.aboutEn : section.about }}
-      </pre>
+      <div v-html="$locale == 'en' ? section.aboutEn : section.about"></div>
     </v-alert>
 
     <div dir="ltr" class="divider divider-center">
