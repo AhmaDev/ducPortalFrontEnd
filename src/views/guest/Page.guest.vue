@@ -1,8 +1,19 @@
 <template>
-  <div v-if="page != null" class="pa-10" id="guestPage">
+  <div  class="pa-10" id="guestPage">
     <v-card>
       <v-card-text>
-        <div style="overflow: auto;" v-html="$locale == 'en' ? page.pageContentEn : page.pageContent"></div>
+        <div v-if="page != null" style="overflow: auto;" v-html="$locale == 'en' ? page.pageContentEn : page.pageContent"></div>
+        <div v-if="isError">
+          <center class="pa-10">
+            <h1 style="font-size: 72px">😰</h1>
+            <br><br>
+            <br><br>
+
+            <h1 style="font-size: 72px">404</h1>
+            <br><br>
+            <h1>لا يوجد نتائج</h1>
+          </center>
+        </div>
       </v-card-text>
     </v-card>
   </div>
@@ -24,6 +35,7 @@ export default {
     title: "",
     page: null,
     isLoading: true,
+    isError: false,
   }),
   created: function () {
     this.fetch();
@@ -35,6 +47,8 @@ export default {
         .then((res) => {
           this.page = res.data;
           this.title = res.data.pageTitle;
+        }).catch(() => {
+          this.isError = true;
         })
         .finally(() => (this.isLoading = false));
     },

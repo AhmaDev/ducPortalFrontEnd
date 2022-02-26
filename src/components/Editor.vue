@@ -65,13 +65,7 @@
                 </template>
                 <v-list>
                   <v-list-item
-                    @click="
-                      editor
-                        .chain()
-                        .focus()
-                        .setMark('textStyle', { fontSize: '100px' })
-                        .run()
-                    "
+                    @click="editor.chain().focus().toggleHeading({ level: index + 1 }).run()"
                     dense
                     v-for="(item, index) in fontSizes"
                     :key="index"
@@ -268,10 +262,15 @@
       v-if="editor"
       v-show="editor.can().deleteTable()"
     >
-      <v-btn small dark @click="editor.chain().focus().deleteTable().run()"> حذف الجدول </v-btn>
-      <v-btn small dark @click="editor.chain().focus().deleteRow().run()"> حذف السطر </v-btn>
-      <v-btn small dark @click="editor.chain().focus().addRowAfter().run()">  اضافة سطر جديد </v-btn>
-      
+      <v-btn small dark @click="editor.chain().focus().deleteTable().run()">
+        حذف الجدول
+      </v-btn>
+      <v-btn small dark @click="editor.chain().focus().deleteRow().run()">
+        حذف السطر
+      </v-btn>
+      <v-btn small dark @click="editor.chain().focus().addRowAfter().run()">
+        اضافة سطر جديد
+      </v-btn>
     </bubble-menu>
   </div>
 </template>
@@ -328,18 +327,7 @@ export default {
         "#750037",
         "#FFA600",
       ],
-      fontSizes: [
-        "10px",
-        "12px",
-        "14px",
-        "16px",
-        "18px",
-        "20px",
-        "24px",
-        "32px",
-        "64px",
-        "72px",
-      ],
+      fontSizes: ["H1", "H2", "H3", "H4", "H5", "H6"],
       addVideoModal: false,
       addAlertModal: false,
       addLinkModal: false,
@@ -426,7 +414,7 @@ export default {
         Button,
         TextStyle,
         Heading.configure({
-          levels: [1, 2, 3],
+          levels: [1, 2, 3, 4, 5, 6],
         }),
         TextAlign.configure({
           types: ["heading", "paragraph"],
@@ -439,6 +427,7 @@ export default {
           HTMLAttributes: {
             class: "customTable",
           },
+          resizable: true,
         }),
         TableRow,
         TableCell,
