@@ -49,14 +49,15 @@
                     >
                       <v-icon>la-trash</v-icon>
                     </v-btn>
-                    <v-btn
+                    <!-- <v-btn
                       v-if="isDialog"
                       @click="selectImage(file.path)"
                       rounded
                       color="success"
                     >
                       <v-icon>la-check</v-icon>
-                    </v-btn>
+                    </v-btn> -->
+                    <v-icon dark>la-check</v-icon>
                   </div>
                 </v-expand-transition>
               </v-img>
