@@ -21,7 +21,7 @@
             label="Post Title"
           ></v-text-field>
         </v-col>
-        <v-col cols="1">
+        <v-col cols="2">
           <v-btn color="primary" block @click="selectImage()"
             >اختيار صورة
           </v-btn>
@@ -49,13 +49,19 @@
             />
           </center>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-switch
             v-model="newPostForm.isSlider"
             :true-value="1"
             :false-value="0"
             label="سلايدر"
           ></v-switch>
+          <div v-if="postId != 0">
+            <v-btn target="_BLANK" :to="'/' + userInfo.sectionSlug + '/post/' + postId">
+            <v-icon left>mdi-eye</v-icon>
+            Preview
+          </v-btn>
+          </div>
         </v-col>
         <v-col cols="12">
           <h2>اللغة العربية</h2>

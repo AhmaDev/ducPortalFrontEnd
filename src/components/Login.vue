@@ -10,6 +10,7 @@
         <v-text-field
           label="اسم المستخدم"
           outlined
+          @keypress.enter="login()"
           dense
           v-model="loginInfo.username"
         ></v-text-field>
@@ -17,6 +18,7 @@
           label="كلمة المرور"
           outlined
           dense
+          @keypress.enter="login()"
           type="password"
           v-model="loginInfo.password"
         ></v-text-field>

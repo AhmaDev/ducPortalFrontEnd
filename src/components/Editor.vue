@@ -65,7 +65,13 @@
                 </template>
                 <v-list>
                   <v-list-item
-                    @click="editor.chain().focus().toggleHeading({ level: index + 1 }).run()"
+                    @click="
+                      editor
+                        .chain()
+                        .focus()
+                        .toggleHeading({ level: index + 1 })
+                        .run()
+                    "
                     dense
                     v-for="(item, index) in fontSizes"
                     :key="index"
@@ -80,11 +86,24 @@
           </v-col>
           <v-col>
             <v-btn-toggle dense>
-              <v-btn @click="selectImage()">
+              <v-btn
+                @click="
+                  fileEmbed = true;
+                  selectImage();
+                "
+              >
                 <v-icon>la-image</v-icon>
               </v-btn>
               <v-btn @click="addVideoModal = true">
                 <v-icon>la-youtube</v-icon>
+              </v-btn>
+              <v-btn
+                @click="
+                  fileEmbed = false;
+                  selectImage();
+                "
+              >
+                <v-icon>la-file-pdf</v-icon>
               </v-btn>
             </v-btn-toggle>
           </v-col>
@@ -331,6 +350,7 @@ export default {
       addVideoModal: false,
       addAlertModal: false,
       addLinkModal: false,
+      fileEmbed: true,
       alertType: "d-block",
       link: "",
       youtubeLink: "",
@@ -343,7 +363,14 @@ export default {
     },
     setImagePath(path) {
       this.$refs.uploadsBottomSheet.close();
-      this.editor.commands.setImage({ src: this.$baseUrl + path });
+      if (this.fileEmbed) {
+        this.editor.commands.setImage({ src: this.$baseUrl + path });
+      } else {
+        this.editor.commands.toggleLink({
+          href: this.$baseUrl + path,
+          target: "_blank",
+        });
+      }
     },
     addYoutubeVideo(link) {
       const url = "https://www.youtube.com/embed/" + this.youtube_parser(link);

@@ -7,7 +7,7 @@
     </v-app-bar>
     <v-card class="pa-5">
       <v-row>
-        <v-col cols="6">
+        <v-col cols="5">
           <v-text-field
             v-model="newPageForm.pageTitle"
             outlined
@@ -15,13 +15,19 @@
             label="عنوان الصفحة"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="5">
           <v-text-field
             v-model="newPageForm.pageTitleEn"
             outlined
             hide-details
             label="Page Title"
           ></v-text-field>
+        </v-col>
+        <v-col v-if="pageId != 0">
+          <v-btn target="_BLANK" :to="'/' + userInfo.sectionSlug + '/page/' + pageId">
+            <v-icon left>mdi-eye</v-icon>
+            Preview
+          </v-btn>
         </v-col>
       </v-row>
     </v-card>
