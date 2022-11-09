@@ -35,6 +35,7 @@ const axiosConfig = {
   timeout: 30000,
 };
 Vue.http = Vue.prototype.$http = axios.create(axiosConfig);
+Vue.mainServerHttp = Vue.prototype.$mainServerHttp = axios.create();
 Vue.prototype.$background = "#2C86FC"
 Vue.use(VuePageTransition);
 Vue.use(Loading , {

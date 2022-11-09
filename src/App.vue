@@ -251,6 +251,12 @@ export default {
           route: "/admin/dashboard/users",
           role: "Admin",
         },
+        {
+          title: "الطلاب",
+          icon: "la-users",
+          route: "/admin/dashboard/students",
+          role: "Admin",
+        },
       ];
     }
     this.$router.beforeEach((to, from, next) => {

@@ -23,6 +23,7 @@
           <v-hover v-slot:default="{ hover }">
             <v-card class="mx-auto imagePick" color="grey lighten-4">
               <v-img
+                v-if="file.mime.match(/^image/)"
                 @click="selectImage(file.path)"
                 :aspect-ratio="16 / 9"
                 :src="checkMime($baseUrl + file.path, file.mime)"
@@ -61,7 +62,50 @@
                   </div>
                 </v-expand-transition>
               </v-img>
-              <v-card-text class="fileName">{{ file.mime }}</v-card-text>
+              <v-img
+                v-else
+                @click="selectImage(file.path)"
+                :aspect-ratio="16 / 9"
+                style="background-size: cover !important"
+                src="@/assets/file.png"
+              >
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="
+                      d-flex
+                      transition-fast-in-fast-out
+                      primary
+                      darken-2
+                      v-card--reveal
+                      display-3
+                      white--text
+                    "
+                    style="height: 100%"
+                  >
+                    <v-btn
+                      v-if="!isDialog"
+                      @click="deleteFile(file.idUpload)"
+                      rounded
+                      color="error"
+                    >
+                      <v-icon>la-trash</v-icon>
+                    </v-btn>
+                    <!-- <v-btn
+                      v-if="isDialog"
+                      @click="selectImage(file.path)"
+                      rounded
+                      color="success"
+                    >
+                      <v-icon>la-check</v-icon>
+                    </v-btn> -->
+                    <v-icon dark>la-check</v-icon>
+                  </div>
+                </v-expand-transition>
+              </v-img>
+              <v-card-text class="fileName">{{
+                file.filename == "none" ? file.mime : file.filename
+              }}</v-card-text>
             </v-card>
           </v-hover>
         </v-col>
@@ -166,7 +210,7 @@ export default {
       if (mime.match(/^image/)) {
         return path;
       } else {
-        return "@/assets/file.png";
+        return "../assets/file.png";
       }
     },
   },
@@ -217,6 +261,6 @@ export default {
   background-color: #000000ab;
   color: white !important;
   backdrop-filter: blur(0.7) !important;
-  transition: 0.3s
+  transition: 0.3s;
 }
 </style>

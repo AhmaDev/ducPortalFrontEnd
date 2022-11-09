@@ -18,6 +18,7 @@ const routes = [
   { path: '/:section/dashboard/uploads', name: 'Upload', component: () => import('../components/Upload.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/menu', name: 'Menu', component: () => import('../views/Menu.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/admin/dashboard/users', name: 'Users', component: () => import('../views/Users.vue'), beforeEnter: (to, from, next) => checkAuth('Admin', to, from, next) },
+  { path: '/admin/dashboard/students', name: 'Students', component: () => import('../views/Students.vue'), beforeEnter: (to, from, next) => checkAuth('Admin', to, from, next) },
   { path: '/:section/dashboard/new/post', name: 'NewPost', component: () => import('../views/NewPost.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/new/page', name: 'NewPage', component: () => import('../views/NewPage.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
   { path: '/:section/dashboard/edit/post/:id', name: 'EditPost', component: () => import('../views/NewPost.vue'), beforeEnter: (to, from, next) => checkAuth('Website Editor', to, from, next) },
