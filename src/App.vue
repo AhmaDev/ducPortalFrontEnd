@@ -1,13 +1,7 @@
 <template>
   <v-app :style="this.$vuetify.theme.dark ? '' : 'background-color: #EEE'">
-    <v-navigation-drawer
-      :mini-variant="drawer"
-      mini-variant-width="72"
-      v-if="isLoggedIn"
-      app
-      :right="$locale == 'ar'"
-      permanent
-    >
+    <v-navigation-drawer :mini-variant="drawer" mini-variant-width="72" v-if="isLoggedIn" app :right="$locale == 'ar'"
+      permanent>
       <div v-if="!drawer" class="pa-2">
         <v-card class="mx-auto" max-width="344" outlined>
           <v-list-item dense>
@@ -39,15 +33,9 @@
           </v-list-item-icon>
         </v-list-item>
         <template v-for="item in items">
-          <v-list-item
-            v-if="
-              item.role == 'All' ||
-              item.role.split(',').includes(userInfo.roleName)
-            "
-            :to="item.route"
-            :key="item.title"
-            link
-          >
+          <v-list-item v-if="item.role == 'All' ||
+            item.role.split(',').includes(userInfo.roleName)
+            " :to="item.route" :key="item.title" link>
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -102,7 +90,7 @@
             <!-- <Login v-if="!isLoggedIn" /> -->
             <router-view />
           </vue-page-transition>
-            <vue-progress-bar></vue-progress-bar>
+          <vue-progress-bar></vue-progress-bar>
         </v-container>
       </v-main>
     </div>
@@ -143,7 +131,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      this.$router.push("/dashboard");
+      this.$router.push("/securedAuth");
       setTimeout(() => {
         location.reload();
       }, 1000);
@@ -193,68 +181,68 @@ export default {
           route:
             "/" +
             this.userInfo.sectionSlug +
-            "/dashboard/section/" +
+            "/securedAuth/section/" +
             this.userInfo.sectionId,
           role: "Website Editor",
         },
         {
           title: "القوائم",
           icon: "la-file-alt",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/menu/",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/menu/",
           role: "Website Editor",
         },
         {
           title: "الكادر",
           icon: "la-chalkboard-teacher",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/staff",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/staff",
           role: "Website Editor",
         },
         {
           title: "المواد الدراسية",
           icon: "la-book",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/lessons",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/lessons",
           role: "Website Editor",
         },
         {
           title: "الصفحات",
           icon: "la-file",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/pages",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/pages",
           role: "Website Editor",
         },
         {
           title: "اخبار القسم",
           icon: "la-newspaper",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/posts",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/posts",
           role: "Website Editor",
         },
         {
           title: "معرض الصور",
           icon: "la-photo-video",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/gallery",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/gallery",
           role: "Website Editor",
         },
         {
           title: "الاقسام",
           icon: "la-icons",
-          route: "/admin/dashboard/sections",
+          route: "/admin/securedAuth/sections",
           role: "Admin",
         },
         {
           title: "الملفات",
           icon: "la-file",
-          route: "/" + this.userInfo.sectionSlug + "/dashboard/uploads",
+          route: "/" + this.userInfo.sectionSlug + "/securedAuth/uploads",
           role: "Admin",
         },
         {
           title: "المستخدمين",
           icon: "la-user",
-          route: "/admin/dashboard/users",
+          route: "/admin/securedAuth/users",
           role: "Admin",
         },
         {
           title: "الطلاب",
           icon: "la-users",
-          route: "/admin/dashboard/students",
+          route: "/admin/securedAuth/students",
           role: "Admin",
         },
       ];
