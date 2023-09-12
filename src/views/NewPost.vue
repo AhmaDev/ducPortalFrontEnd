@@ -8,59 +8,32 @@
     <v-card class="pa-10">
       <v-row>
         <v-col cols="4">
-          <v-text-field
-            v-model="newPostForm.postTitle"
-            outlined
-            label="عنوان الخبر"
-          ></v-text-field>
+          <v-text-field v-model="newPostForm.postTitle" outlined label="عنوان الخبر"></v-text-field>
         </v-col>
         <v-col cols="4">
-          <v-text-field
-            v-model="newPostForm.postTitleEn"
-            outlined
-            label="Post Title"
-          ></v-text-field>
+          <v-text-field v-model="newPostForm.postTitleEn" outlined label="Post Title"></v-text-field>
         </v-col>
         <v-col cols="2">
-          <v-btn color="primary" block @click="selectImage()"
-            >اختيار صورة
+          <v-btn color="primary" block @click="selectImage()">اختيار صورة
           </v-btn>
-          <v-btn
-            v-if="newPostForm.postImage != ''"
-            color="error"
-            block
-            @click="newPostForm.postImage = ''"
-            >حذف الصورة
+          <v-btn v-if="newPostForm.postImage != ''" color="error" block @click="newPostForm.postImage = ''">حذف الصورة
           </v-btn>
-          <vue-bottom-sheet
-            max-width="70%"
-            max-height="90%"
-            ref="uploadsBottomSheet"
-          >
+          <vue-bottom-sheet max-width="70%" max-height="90%" ref="uploadsBottomSheet">
             <Uploads :isDialog="true" @clicked="setImagePath" />
           </vue-bottom-sheet>
         </v-col>
         <v-col cols="3">
           <center>
-            <img
-              v-if="newPostForm.postImage != ''"
-              :src="$baseUrl + newPostForm.postImage"
-              width="100%"
-            />
+            <img v-if="newPostForm.postImage != ''" :src="$baseUrl + newPostForm.postImage" width="100%" />
           </center>
         </v-col>
         <v-col cols="6">
-          <v-switch
-            v-model="newPostForm.isSlider"
-            :true-value="1"
-            :false-value="0"
-            label="سلايدر"
-          ></v-switch>
+          <v-switch v-model="newPostForm.isSlider" :true-value="1" :false-value="0" label="سلايدر"></v-switch>
           <div v-if="postId != 0">
             <v-btn target="_BLANK" :to="'/' + userInfo.sectionSlug + '/post/' + postId">
-            <v-icon left>mdi-eye</v-icon>
-            Preview
-          </v-btn>
+              <v-icon left>mdi-eye</v-icon>
+              Preview
+            </v-btn>
           </div>
         </v-col>
         <v-col cols="12">
@@ -165,7 +138,7 @@ export default {
               message: "تم التحديث",
               duration: 3000,
             });
-            this.$router.push('/' + this.userInfo.sectionSlug + '/dashboard/edit/post/' + res.data.idPost);
+            this.$router.push('/' + this.userInfo.sectionSlug + '/securedAuth/edit/post/' + res.data.idPost);
             this.postId = res.data.idPost;
           })
           .finally(() => loading.hide());
@@ -202,5 +175,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

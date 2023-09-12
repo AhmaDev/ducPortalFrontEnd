@@ -10,22 +10,14 @@
     <v-card>
       <v-data-table :headers="tableHeader" :items="staff" :loading="isLoading">
         <template v-slot:[`item.staffImage`]="{ item }">
-          <v-img
-            :src="$baseUrl + item.staffImage"
-            height="50px"
-            width="50px"
-          ></v-img>
+          <v-img :src="$baseUrl + item.staffImage" height="50px" width="50px"></v-img>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn
-            icon
-            :to="
-              '/' +
-              userInfo.sectionSlug +
-              '/dashboard/edit/staff/' +
-              item.idStaff
-            "
-          >
+          <v-btn icon :to="'/' +
+            userInfo.sectionSlug +
+            '/securedAuth/edit/staff/' +
+            item.idStaff
+            ">
             <v-icon :title="item.idStaff">la-edit</v-icon>
           </v-btn>
           <v-btn icon @click="deleteStaff(item.idStaff)">
@@ -39,55 +31,24 @@
       <v-card>
         <v-card-title>اضافة شخص جديد</v-card-title>
         <v-card-text>
-          <v-btn color="primary" block @click="selectImage()"
-            >اختيار صورة
+          <v-btn color="primary" block @click="selectImage()">اختيار صورة
           </v-btn>
           <br />
           <center>
-            <img
-              v-if="newStaffForm.staffImage != ''"
-              :src="$baseUrl + newStaffForm.staffImage"
-              height="200px"
-            />
+            <img v-if="newStaffForm.staffImage != ''" :src="$baseUrl + newStaffForm.staffImage" height="200px" />
           </center>
-          <vue-bottom-sheet
-            max-width="70%"
-            max-height="90%"
-            ref="uploadsBottomSheet"
-          >
+          <vue-bottom-sheet max-width="70%" max-height="90%" ref="uploadsBottomSheet">
             <Uploads :isDialog="true" @clicked="setImagePath" />
           </vue-bottom-sheet>
-          <v-text-field
-            v-model="newStaffForm.staffName"
-            outlined
-            label="الاسم"
-          ></v-text-field>
-          <v-text-field
-            v-model="newStaffForm.staffPosition"
-            outlined
-            label="العنوان الوظيفي"
-          ></v-text-field>
-          <v-text-field
-            v-model="newStaffForm.staffEmail"
-            outlined
-            label="البريد الالكتروني"
-            prefix="duc.edu.iq@"
-          ></v-text-field>
-          <v-text-field
-            v-model="newStaffForm.scopusLink"
-            outlined
-            label="رابط Scopus"
-          ></v-text-field>
-          <v-text-field
-            v-model="newStaffForm.scholarLink"
-            outlined
-            label="رابط Scholar"
-          ></v-text-field>
+          <v-text-field v-model="newStaffForm.staffName" outlined label="الاسم"></v-text-field>
+          <v-text-field v-model="newStaffForm.staffPosition" outlined label="العنوان الوظيفي"></v-text-field>
+          <v-text-field v-model="newStaffForm.staffEmail" outlined label="البريد الالكتروني"
+            prefix="duc.edu.iq@"></v-text-field>
+          <v-text-field v-model="newStaffForm.scopusLink" outlined label="رابط Scopus"></v-text-field>
+          <v-text-field v-model="newStaffForm.scholarLink" outlined label="رابط Scholar"></v-text-field>
           <h3>السيرة الذاتية</h3>
           <br>
-           <tiptap
-            v-model="newStaffForm.cvLink"
-          ></tiptap>
+          <tiptap v-model="newStaffForm.cvLink"></tiptap>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="addNewStaff()" color="success">اضافة</v-btn>
@@ -195,5 +156,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

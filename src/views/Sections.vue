@@ -17,16 +17,11 @@
             </v-card-image>
             <v-card-title>{{ section.sectionName }}</v-card-title>
             <v-card-actions>
-              <v-btn
-                :to="
-                  '/' +
-                  section.sectionSlug +
-                  '/dashboard/section/' +
-                  section.idSection
-                "
-                block
-                color="primary"
-              >
+              <v-btn :to="'/' +
+                section.sectionSlug +
+                '/securedAuth/section/' +
+                section.idSection
+                " block color="primary">
                 تعديل
               </v-btn>
             </v-card-actions>
@@ -40,47 +35,24 @@
         <v-card-title class="text-h5"> اضافة قسم جديد </v-card-title>
         <v-card-text dir="ltr">
           <br />
-          <v-text-field
-            v-model="newSectionForm.sectionName"
-            outlined
-            label="اسم القسم"
-          ></v-text-field>
-          <v-text-field
-            v-model="newSectionForm.sectionNameEn"
-            outlined
-            label="اسم القسم باللغة الانجليزية"
-          ></v-text-field>
-          <v-text-field
-            :rules="[rules.slug]"
-            prefix="https://portal.duc.edu.iq/"
-            outlined
-            v-model="newSectionForm.sectionSlug"
-            label="رابط القسم"
-          ></v-text-field>
-          <v-btn color="primary" block @click="selectImage()"
-            >اختيار صورة
+          <v-text-field v-model="newSectionForm.sectionName" outlined label="اسم القسم"></v-text-field>
+          <v-text-field v-model="newSectionForm.sectionNameEn" outlined
+            label="اسم القسم باللغة الانجليزية"></v-text-field>
+          <v-text-field :rules="[rules.slug]" prefix="https://portal.duc.edu.iq/" outlined
+            v-model="newSectionForm.sectionSlug" label="رابط القسم"></v-text-field>
+          <v-btn color="primary" block @click="selectImage()">اختيار صورة
           </v-btn>
           <center>
-            <img
-              v-if="newSectionForm.sectionLogo != ''"
-              :src="$baseUrl + newSectionForm.sectionLogo"
-              height="200px"
-            />
+            <img v-if="newSectionForm.sectionLogo != ''" :src="$baseUrl + newSectionForm.sectionLogo" height="200px" />
           </center>
-          <vue-bottom-sheet
-            max-width="70%"
-            max-height="90%"
-            ref="uploadsBottomSheet"
-          >
+          <vue-bottom-sheet max-width="70%" max-height="90%" ref="uploadsBottomSheet">
             <Uploads :isDialog="true" @clicked="setImagePath" />
           </vue-bottom-sheet>
         </v-card-text>
         <v-card-actions>
           <v-btn color="success" @click="addNewSection()">اضافة</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="error" outlined @click="addNewSectionDialog = false"
-            >الغاء</v-btn
-          >
+          <v-btn color="error" outlined @click="addNewSectionDialog = false">الغاء</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -189,5 +161,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

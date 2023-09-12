@@ -3,21 +3,17 @@
     <v-app-bar app>
       <v-toolbar-title>اخبار القسم</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon :to="'/' + userInfo.sectionSlug + '/dashboard/new/post'">
+      <v-btn icon :to="'/' + userInfo.sectionSlug + '/securedAuth/new/post'">
         <v-icon>la-plus</v-icon>
       </v-btn>
     </v-app-bar>
     <v-card>
       <v-data-table :headers="tableHeader" :items="posts" :loading="isLoading">
         <template v-slot:[`item.postImage`]="{ item }">
-          <v-img
-            :src="$baseUrl + item.postImage"
-            height="50px"
-            width="100px"
-          ></v-img>
+          <v-img :src="$baseUrl + item.postImage" height="50px" width="100px"></v-img>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn icon :to="'/' + userInfo.sectionSlug + '/dashboard/edit/post/' + item.idPost">
+          <v-btn icon :to="'/' + userInfo.sectionSlug + '/securedAuth/edit/post/' + item.idPost">
             <v-icon :title="item.idPost">la-edit</v-icon>
           </v-btn>
           <v-btn icon @click="deletePost(item.idPost)">
@@ -87,5 +83,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

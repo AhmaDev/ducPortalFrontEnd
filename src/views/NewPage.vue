@@ -8,20 +8,10 @@
     <v-card class="pa-5">
       <v-row>
         <v-col cols="5">
-          <v-text-field
-            v-model="newPageForm.pageTitle"
-            outlined
-            hide-details
-            label="عنوان الصفحة"
-          ></v-text-field>
+          <v-text-field v-model="newPageForm.pageTitle" outlined hide-details label="عنوان الصفحة"></v-text-field>
         </v-col>
         <v-col cols="5">
-          <v-text-field
-            v-model="newPageForm.pageTitleEn"
-            outlined
-            hide-details
-            label="Page Title"
-          ></v-text-field>
+          <v-text-field v-model="newPageForm.pageTitleEn" outlined hide-details label="Page Title"></v-text-field>
         </v-col>
         <v-col v-if="pageId != 0">
           <v-btn target="_BLANK" :to="'/' + userInfo.sectionSlug + '/page/' + pageId">
@@ -155,7 +145,7 @@ export default {
               message: "تم التحديث",
               duration: 3000,
             });
-            this.$router.push('/' + this.userInfo.sectionSlug + '/dashboard/edit/page/' + res.data.idPage);
+            this.$router.push('/' + this.userInfo.sectionSlug + '/securedAuth/edit/page/' + res.data.idPage);
             this.pageId = res.data.idPage;
           })
           .finally(() => loading.hide());

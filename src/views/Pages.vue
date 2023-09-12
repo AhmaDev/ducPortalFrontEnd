@@ -3,14 +3,14 @@
     <v-app-bar app>
       <v-toolbar-title>صفحات القسم</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon :to="'/' + userInfo.sectionSlug + '/dashboard/new/page'">
+      <v-btn icon :to="'/' + userInfo.sectionSlug + '/securedAuth/new/page'">
         <v-icon>la-plus</v-icon>
       </v-btn>
     </v-app-bar>
     <v-card>
       <v-data-table :headers="tableHeader" :items="pages" :loading="isLoading">
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn icon :to="'/' + userInfo.sectionSlug + '/dashboard/edit/page/' + item.idPage">
+          <v-btn icon :to="'/' + userInfo.sectionSlug + '/securedAuth/edit/page/' + item.idPage">
             <v-icon :title="item.idPost">la-edit</v-icon>
           </v-btn>
           <v-btn icon @click="deletePage(item.idPage)">
@@ -79,5 +79,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
